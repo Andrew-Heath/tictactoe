@@ -31,6 +31,14 @@
   Upon completion of your work, submit a link to the repository via this form.
 */
 
+// Sets up ability to take input from console and query user(s)
+const readline = require('readline');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
 // ELEMENTS NEEDED
 // Board Class
 //   Tracks moves
@@ -40,22 +48,30 @@
 //   Turn request
 
 function Board() {
-  this.board = [[], [], []];
-  this.turn = 'X';
+  this._board = [null, [' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']];
+  this._whoTurn = 'X';
+  this._whichTurn = 1;
+  this._coord = {
+    A: 0,
+    B: 1,
+    C: 2
+  }
 }
 
 Board.prototype.draw = function() {
   // Draws the board on the console
   /* OUTLINE FOR THE BOARD
 
-       | | 
-      -----
-       | | 
-      -----
-       | | 
+       A B C
+      1 | | 
+       -----
+      2 | | 
+       -----
+      3 | | 
 
   */
-  
+
+  var line0 = 
   var line1 = this.board[0][0] + '|' + this.board[0][1] + '|' + this.board[0][2];
   var line2 = this.board[1][0] + '|' + this.board[1][1] + '|' + this.board[1][2];
   var line3 = this.board[2][0] + '|' + this.board[2][1] + '|' + this.board[2][2];
@@ -69,19 +85,14 @@ Board.prototype.checkWin = function() {
   // Checks to see if either player has won
 };
 
-Board.prototype.takeTurn = function(location) {
-  // Takes in the coords of the player's move
+Board.prototype.takeTurn = function() {
+  // Queries the user(s) for their move, handles it, and continues until the game is won
+  rl.question('Player')
 };
 
-// Sets up ability to take input from console and query user(s)
-const readline = require('readline');
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
 
 // rl.question('What do you think of Node.js? ', (answer) => {
 //   // TODO: Log the answer in a database
 //   console.log(`Thank you for your valuable feedback: ${answer}`);
+//  rl.close();
 // });
