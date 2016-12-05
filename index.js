@@ -48,7 +48,7 @@ const rl = readline.createInterface({
 //   Turn request
 
 function Board() {
-  this._board = [null, [' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']];
+  this._board = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']];
   this._whoTurn = 'X';
   this._whichTurn = 1;
   this._coord = {
@@ -74,47 +74,51 @@ Board.prototype.draw = function() {
   var line = [];
   line[0] = '  A B C';
   line[1] = '';
-  line[2] = '1 ' + this.board[1][0] + '|' + this.board[1][1] + '|' + this.board[1][2];
-  line[3] = '2 ' + this.board[2][0] + '|' + this.board[2][1] + '|' + this.board[2][2];
-  line[4] = '3 ' + this.board[3][0] + '|' + this.board[3][1] + '|' + this.board[3][2];
+  line[2] = '1 ' + this._board[0][0] + '|' + this._board[0][1] + '|' + this._board[0][2];
+  line[3] = '  -----'
+  line[4] = '2 ' + this._board[1][0] + '|' + this._board[1][1] + '|' + this._board[1][2];
+  line[5] = '  -----'
+  line[6] = '3 ' + this._board[2][0] + '|' + this._board[2][1] + '|' + this._board[2][2];
 
   for (var i = 0; i < line.length; i++) {
     console.log(line[i]);
   }
 };
 
-Board.prototype.checkWin = function() {
+Board.prototype.checkWin = function(coord) {
   // Checks to see if either player has won
+  // Starts at the coord and checks to see if there is a contiguous line of 3
+  // 
+
   // rl.close();
 };
 
 Board.prototype.takeTurn = function() {
   // Queries the user(s) for their move, handles it, and continues until the game is won
-  rl.question(('Player ' + this._whoTurn + ' - Where shall you move? Ex. 1A'), function(coord) {
+  this.draw();
+  rl.question(('Player ' + this._whoTurn + ' - Where shall you move? Ex. 1A => '), function(coord) {
     // Check if valid move
     if (!(this._board[coord[0]][this._coord[coord[1]]] === ' ')){
       // if not, state the move was invalid and return
       console.log('Invalid move.');
       return;
     }
-    // if valid, record move and change turn
+    // if valid, record move, check win, and change turn
     this._board[coord[0]][this._coord[coord[1]]] = this._whoTurn;
-    this._whoTurn = this._whoTurn === 'X' ? 'U' : 'X';
     this._whichTurn++;
     // Check if on turn 5 or later
-    if (this._whichTurn >= 5)
+    if (this._whichTurn >= 5) {
       // if so, start checking for victory
+      this.checkWin(coord);
+    }
+    this._whoTurn = this._whoTurn === 'X' ? 'U' : 'X';
+    this.takeTurn();
 
   })
 };
 
-Board.prototype.start = function() {
-  // Function to start a game and keep it going
-  while(true) {
-    this.draw();
-    this.takeTurn();
-  }
-};
+var game = new Board;
+game.takeTurn();
 
 
 // rl.question('What do you think of Node.js? ', (answer) => {
