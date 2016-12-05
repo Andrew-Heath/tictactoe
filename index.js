@@ -62,23 +62,25 @@ Board.prototype.draw = function() {
   // Draws the board on the console
   /* OUTLINE FOR THE BOARD
 
-       A B C
-      1 | | 
-       -----
-      2 | | 
-       -----
-      3 | | 
+        A B C
+
+      1  | | 
+        -----
+      2  | | 
+        -----
+      3  | | 
 
   */
+  var line = [];
+  line[0] = '  A B C';
+  line[1] = '';
+  line[2] = '1 ' + this.board[1][0] + '|' + this.board[1][1] + '|' + this.board[1][2];
+  line[3] = '2 ' + this.board[2][0] + '|' + this.board[2][1] + '|' + this.board[2][2];
+  line[4] = '3 ' + this.board[3][0] + '|' + this.board[3][1] + '|' + this.board[3][2];
 
-  var line0 = 
-  var line1 = this.board[0][0] + '|' + this.board[0][1] + '|' + this.board[0][2];
-  var line2 = this.board[1][0] + '|' + this.board[1][1] + '|' + this.board[1][2];
-  var line3 = this.board[2][0] + '|' + this.board[2][1] + '|' + this.board[2][2];
-
-  console.log(line1);
-  console.log(line2);
-  console.log(line3);
+  for (var i = 0; i < line.length; i++) {
+    console.log(line[i]);
+  }
 };
 
 Board.prototype.checkWin = function() {
@@ -87,7 +89,21 @@ Board.prototype.checkWin = function() {
 
 Board.prototype.takeTurn = function() {
   // Queries the user(s) for their move, handles it, and continues until the game is won
-  rl.question('Player')
+  rl.question(('Player ' + this._whoTurn + ' - Where shall you move? Ex. 1A'), function(coord) {
+    // Check if valid move
+      // if not, state the move was invalid and return
+      // if valid, record move and change turn
+      // Check if on turn 5 or later
+        // if so, start checking for victory
+
+  })
+};
+
+Board.prototype.start = function() {
+  // Function to start a game and keep it going
+  while(true) {
+    this.takeTurn();
+  }
 };
 
 
