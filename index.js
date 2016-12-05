@@ -39,6 +39,23 @@
 //   Victory checker
 //   Turn request
 
+function Board() {
+  this.board = [[], [], []];
+  this.turn = 'X';
+}
+
+Board.prototype.draw = function() {
+  // Draws the board on the console
+};
+
+Board.prototype.checkWin = function() {
+  // Checks to see if either player has won
+};
+
+Board.prototype.takeTurn = function(location) {
+  // Takes in the coords of the player's move
+};
+
 // Sets up ability to take input from console and query user(s)
 const readline = require('readline');
 
