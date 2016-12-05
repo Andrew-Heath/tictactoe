@@ -31,3 +31,23 @@
   Upon completion of your work, submit a link to the repository via this form.
 */
 
+// ELEMENTS NEEDED
+// Board Class
+//   Tracks moves
+//   Draw function
+//   Turn tracker
+//   Victory checker
+//   Turn request
+
+// Sets up ability to take input from console and query user(s)
+const readline = require('readline');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+// rl.question('What do you think of Node.js? ', (answer) => {
+//   // TODO: Log the answer in a database
+//   console.log(`Thank you for your valuable feedback: ${answer}`);
+// });
