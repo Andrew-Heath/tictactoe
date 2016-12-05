@@ -85,16 +85,25 @@ Board.prototype.draw = function() {
 
 Board.prototype.checkWin = function() {
   // Checks to see if either player has won
+  // rl.close();
 };
 
 Board.prototype.takeTurn = function() {
   // Queries the user(s) for their move, handles it, and continues until the game is won
   rl.question(('Player ' + this._whoTurn + ' - Where shall you move? Ex. 1A'), function(coord) {
     // Check if valid move
+    if (!(this._board[coord[0]][this._coord[coord[1]]] === ' ')){
       // if not, state the move was invalid and return
-      // if valid, record move and change turn
-      // Check if on turn 5 or later
-        // if so, start checking for victory
+      console.log('Invalid move.');
+      return;
+    }
+    // if valid, record move and change turn
+    this._board[coord[0]][this._coord[coord[1]]] = this._whoTurn;
+    this._whoTurn = this._whoTurn === 'X' ? 'U' : 'X';
+    this._whichTurn++;
+    // Check if on turn 5 or later
+    if (this._whichTurn >= 5)
+      // if so, start checking for victory
 
   })
 };
@@ -102,6 +111,7 @@ Board.prototype.takeTurn = function() {
 Board.prototype.start = function() {
   // Function to start a game and keep it going
   while(true) {
+    this.draw();
     this.takeTurn();
   }
 };
