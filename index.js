@@ -46,6 +46,23 @@ function Board() {
 
 Board.prototype.draw = function() {
   // Draws the board on the console
+  /* OUTLINE FOR THE BOARD
+
+       | | 
+      -----
+       | | 
+      -----
+       | | 
+
+  */
+  
+  var line1 = this.board[0][0] + '|' + this.board[0][1] + '|' + this.board[0][2];
+  var line2 = this.board[1][0] + '|' + this.board[1][1] + '|' + this.board[1][2];
+  var line3 = this.board[2][0] + '|' + this.board[2][1] + '|' + this.board[2][2];
+
+  console.log(line1);
+  console.log(line2);
+  console.log(line3);
 };
 
 Board.prototype.checkWin = function() {
